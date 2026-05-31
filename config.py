@@ -5,11 +5,14 @@ from libqtile.utils import guess_terminal
 import os
 import subprocess
 
+@hook.subscribe.startup_once
+def autostart():
+    subprocess.Popen(["/home/phasewalk/nix/config/qtile/autostart.sh"])
 
 mod = "mod4"
 terminal = guess_terminal()
 
-myTerm = "alacritty" 
+myTerm = "kitty" 
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -40,7 +43,7 @@ keys = [
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn(myTerm), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -120,7 +123,7 @@ def C(x): return x[0] if isinstance(x, (list, tuple)) else x
 
 layout_theme = {
     "border_width" : 1,
-    "margin" : 1,
+    "margin" : 10,
     "border_focus" : colors[6],
     "border_normal" : colors[0],
 }
