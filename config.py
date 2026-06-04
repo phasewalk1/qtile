@@ -7,10 +7,11 @@ import subprocess
 
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.Popen(["/home/phasewalk/nix/config/qtile/autostart.sh"])
+    subprocess.Popen(["/home/phasewalk/nix/tooling/qtile/autostart.sh"])
 
 mod = "mod4"
 terminal = guess_terminal()
+browser = "firefox"
 
 myTerm = "kitty" 
 
@@ -44,6 +45,7 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(myTerm), desc="Launch terminal"),
+    Key([mod], "b", lazy.spawn(browser), desc="Launch browser"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -244,21 +246,21 @@ screens = [
                     visible_on_warn = False,
                 ),
                 sep,
-                widget.Battery(
-                    foreground=colors[6],           # pick a palette slot you like
-                    padding=8,
-                    update_interval=5,
-                    format='{percent:2.0%} {char} {hour:d}:{min:02d}',  # e.g. "73% ⚡ 1:45"
-                    fmt='Bat: {}',
-                    charge_char='',               # shown while charging
-                    discharge_char='',            # Nerd icon; use '-' if you prefer plain ascii
-                    full_char='✔',                 # when at/near 100%
-                    unknown_char='?',
-                    empty_char='!', 
-                    mouse_callbacks={
-                        'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e upower -i $(upower -e | grep BAT)'),
-                    },
-                ),
+                #widget.Battery(
+                #    foreground=colors[6],           # pick a palette slot you like
+                #    padding=8,
+                #    update_interval=5,
+                #    format='{percent:2.0%} {char} {hour:d}:{min:02d}',  # e.g. "73% ⚡ 1:45"
+                #    fmt='Bat: {}',
+                #    charge_char='',               # shown while charging
+                #    discharge_char='',            # Nerd icon; use '-' if you prefer plain ascii
+                #    full_char='✔',                 # when at/near 100%
+                #    unknown_char='?',
+                #    empty_char='!', 
+                #    mouse_callbacks={
+                #        'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e upower -i $(upower -e | grep BAT)'),
+                #    },
+                #),
                 sep,
                 widget.Volume(
                     foreground = colors[7],
